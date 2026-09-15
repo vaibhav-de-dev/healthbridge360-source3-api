@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: healthbridge360-source3-api
+    runtime: python
+    plan: free
+    rootDir: render_api
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: HB360_API_EVENT_COUNT
+        value: "2500"
+      - key: HB360_API_SEED
+        value: "36009"
+      - key: HB360_API_SCHEMA_V2_RATE
+        value: "0.60"
+      - key: HB360_API_SOURCE_SYSTEM
+        value: "HEALTHBRIDGE360_EVENT_PLATFORM"
